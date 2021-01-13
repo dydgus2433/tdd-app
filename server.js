@@ -5,7 +5,13 @@ const HOST = "0.0.0.0";
 
 //App
 const app = express();
+
+const productRoutes = require("./routes");
+
+app.use("/api/products", productRoutes);
+
 app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
