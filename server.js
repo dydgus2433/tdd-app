@@ -13,6 +13,9 @@ const mongoose = require("mongoose");
 mongoose
   .connect(config.mongodbURI, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("MongoDB ConnectDB.."))
   .catch((err) => console.log(err));
