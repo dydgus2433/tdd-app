@@ -9,24 +9,22 @@ const app = express();
 
 const productRoutes = require("./routes");
 const mongoose = require("mongoose");
+console.log("config.mongodbURI", config.mongodbURI);
 
 mongoose
   .connect(config.mongodbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
   })
-  .then(() => console.log("MongoDB ConnectDB.."))
+  .then(() => console.log("MongoDB Connected.."))
   .catch((err) => console.log(err));
+app.use(express.json());
 
 app.use("/api/products", productRoutes);
-
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(PORT, HOST);
+app.listen(PORT);
 console.log(`Running on porst ${PORT} ${HOST}`);
