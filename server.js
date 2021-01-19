@@ -9,7 +9,6 @@ const app = express();
 
 const productRoutes = require("./routes");
 const mongoose = require("mongoose");
-console.log("config.mongodbURI", config.mongodbURI);
 
 mongoose
   .connect(config.mongodbURI, {
@@ -26,5 +25,12 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// 에러 처리기
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
+});
+
 app.listen(PORT);
 console.log(`Running on porst ${PORT} ${HOST}`);
+
+module.exports = app;
